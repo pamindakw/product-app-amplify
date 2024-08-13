@@ -2,6 +2,7 @@
   "name": "lab12",
   "version": "0.1.0",
   "private": true,
+  "homepage": "{https://main.d36b5m6j6vf57x.amplifyapp.com}/#/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
