@@ -1,8 +1,9 @@
 version: 1
 applications:
-  - appRoot: .
+  - name: frontend
+    appRoot: /frontend
     frontend:
-      buildpath: null
+      buildpath: /
       phases:
         preBuild:
           commands:
