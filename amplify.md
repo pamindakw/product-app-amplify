@@ -4,15 +4,16 @@ applications:
       phases:
         preBuild:
           commands:
+            - echo Installing source NPM dependencies
             - npm install
         build:
           commands:
             - npm run build
       artifacts:
-        baseDirectory: build
+        baseDirectory:
         files:
           - "**/*"
       cache:
         paths:
           - node_modules/**/*
-    appRoot: frontend/src
+    appRoot: frontend
