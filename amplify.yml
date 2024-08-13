@@ -1,0 +1,24 @@
+version: 1
+env:
+  variables:
+    key: 
+     
+frontend:
+  buildpath:
+  phases:
+    preBuild:
+      commands:
+        # Installing source NPM dependencies
+        - npm install
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: build
+    files:
+        - "**/*"
+  cache:
+    paths:
+        - node_modules/**/*
+
+appRoot: frontend
