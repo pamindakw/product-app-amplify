@@ -1,7 +1,6 @@
 version: 1
 applications:
-  - name: frontend
-    appRoot: /frontend
+  - appRoot: frontend
     frontend:
       buildpath: /
       phases:
