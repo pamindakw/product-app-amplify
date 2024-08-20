@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+# MySQL database necessary composer configurations
+  db:
+    image: mysql:8.0
+    container_name: db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 12345
+      MYSQL_DATABASE: product
+
+# Springboot necessary composer configurations
+  app:
+      build:
+        context: ./backend
+        dockerfile: Dockerfile
+      ports:
+        - "8080:8080"
+      container_name: app
+      depends_on:
+        - db
+      environment:
+        SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/product
+        SPRING_DATASOURCE_USERNAME: user
+        SPRING_DATASOURCE_PASSWORD: 12345
