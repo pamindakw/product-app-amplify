@@ -2,28 +2,45 @@ version: '3'
 
 services:
 # MySQL database necessary composer configurations
+# DB Service
   db:
-    image: mysql:8.0
     container_name: mysql
+    image: mysql:8.0
+    restart: on-failure
     ports:
       - "3306:3306"
+    networks: 
+        - springbackendmysql-net
     environment:
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: user
       MYSQL_PASSWORD: 12345
       MYSQL_DATABASE: product
+    # healthcheck:
+      # test: mysqladmin ping -h 127.0.0.1 -u user --password=12345
+      # interval: 10s
+      # timeout: 5s
+      # retries: 5
 
 # Springboot necessary composer configurations
+# APP service
   app:
+      container_name: backend-spring
       build:
         context: .
         dockerfile: Dockerfile
+      restart: on-failure:2
       ports:
         - "8080:8080"
-      container_name: backend-spring
       depends_on:
         - db
+      networks: 
+        - springbackendmysql-net
       environment:
+        # The data base host name should be replaced by data base service name
         SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/product
         SPRING_DATASOURCE_USERNAME: user
         SPRING_DATASOURCE_PASSWORD: 12345
+
+networks:
+  springbackendmysql-net:
